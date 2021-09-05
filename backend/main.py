@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 logger.info('Connecting to Elasticsearch...')
 es = Elasticsearch(
-    host='192.168.12.207',
+    host='192.168.43.27',
     scheme='http'
 )
 logger.info('Loading a predictor model...')
