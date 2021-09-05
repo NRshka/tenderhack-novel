@@ -1,0 +1,16 @@
+#suggestion ul, #suggestion li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+.suggestionWrapper {
+    display: table;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    background-color: #FFFFFF;
+    width: 100%;
+    margin-top: 50px;
+}
