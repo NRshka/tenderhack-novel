@@ -107,7 +107,7 @@ const ProductCard = () => {
 };
 
 function ProductPage() {
-    let { productId } = useParams();
+    let { productId, geolocation } = useParams();
 
     return (
         <div>
@@ -115,22 +115,29 @@ function ProductPage() {
             <div className="container">
                 <Section
                     sectionName="Рекомендуемые"
-                    geolocation={"Москва"}
+                    geolocation={geolocation}
                     endpointUrl={"http://localhost:8000/recom/"}
                     productId={productId}
                 />
 
                 <Section
                     sectionName="Близкие по цене"
-                    geolocation={"Москва"}
+                    geolocation={geolocation}
                     endpointUrl={"http://localhost:8000/same_close/"}
                     productId={productId}
                 />
 
                 <Section
                     sectionName="Посмотрите в той же категории"
-                    geolocation={"Москва"}
+                    geolocation={geolocation}
                     endpointUrl={"http://localhost:8000/cheapest/"}
+                    productId={productId}
+                />
+
+                <Section
+                    sectionName="От того же поставщика"
+                    geolocation={geolocation}
+                    endpointUrl={"http://localhost:8000/same_supp/"}
                     productId={productId}
                 />
             </div>

@@ -30,7 +30,7 @@ function App() {
                 .then(response =>response.json())
                 .then((data) => {
                     try {
-                        let city = data.results[0].address_components[2].long_name;
+                        let city = data.results[0].address_components[1].long_name;
                         resolve(setGeolocation(city));
                     }
                     catch {
