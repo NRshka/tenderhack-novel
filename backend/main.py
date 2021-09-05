@@ -113,8 +113,6 @@ def get_product(product_id):
 
 @app.get("/same_supp/{region_name}/{product_id}")
 async def same_supplier(region_name: str, product_id: int):
-    import pdb
-    pdb.set_trace()
     sup_id = DB.session.query(
         Suppliments.supplier_id
     ).filter(
@@ -126,7 +124,13 @@ async def same_supplier(region_name: str, product_id: int):
     ).join(
         Suppliments
     ).filter(
-        Suppliments.supplier_id == sup_id
+        Suppliments.supplier_id == sup_id[0]
+    ).filter(
+        SKU.cost != float('NaN')
+    ).order_by(
+        SKU.views.desc()
+    ).limit(
+        10
     ).all()
 
     return return_small_product_info(sku_s)
@@ -183,7 +187,7 @@ async def get_cheapest(region_name: str, good_id: int):
 @app.get("/recom/{region_name}/{good_id}")
 async def get_recomendations(region_name: str, good_id: int):
     row_id = DB.session.query(SKU.id).filter(SKU.sku_id == good_id).first()
-    predictions = predictor.predict(row_id[0])
+    predictions = predictor.predict(row_id[0] - 1)
     recommendations = [int(pred[0]) for pred in predictions]
 
     relevant_sku_s = await get_relevant(region_name)
